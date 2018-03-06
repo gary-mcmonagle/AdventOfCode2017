@@ -7,17 +7,17 @@ for row in csv_reader:
         inner_list[index] = int(item)
     rows.append(inner_list)
 
-def get_difference(row):
-    lowest = row[0]
-    highest = row[0]
-    for index, item in enumerate(row):
-        if(item > highest):
-            highest = item
-        if(item < lowest):
-            lowest = item
-    return highest-lowest
+def get_sum(row):
+    got = False
+    for i, outer in enumerate(row):
+        for j, inner in enumerate(row):
+             if(i != j):
+                if(outer%inner == 0):
+                    return int(outer/inner)
+    if(got == False):
+        print("Error no math")
 total = 0
 for index,row in enumerate(rows):
-    total += get_difference(row)
+    total += get_sum(row)
 print(total)
 
