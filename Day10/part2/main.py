@@ -17,6 +17,6 @@ my_string = ""
 for idx, den in enumerate(dense_hash):
     var = str(hex(int(den)).rstrip("L").lstrip("0x") or "0")
     if len(var) == 1:
-        var = "0"+var
+        var = "0"+varl
     my_string += var
 print(my_string)
