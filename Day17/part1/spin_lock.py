@@ -5,7 +5,6 @@ class spin_lock:
         self.step_size = step_size
 
 
-
     def get_lock(self):
         return self.lock
     def insert_value(self, value):
@@ -19,6 +18,6 @@ class spin_lock:
         self.lock.insert(self.current_position+1,value)
         self.current_position += 1
         try:
-            return self.lock[self.current_position+1]
+            return self.lock[0]
         except:
             return None
