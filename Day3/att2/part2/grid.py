@@ -2,7 +2,6 @@ class grid:
     def __init__(self):
         self.nodes = [[1]]
         self.origin = [0,0]
-        self.last_location = self.origin
         #R0 U1 L2 D3
         self.direction = 0
         self.current_location = [0,0]
@@ -32,6 +31,7 @@ class grid:
             self.change_direction()
 
     def change_direction(self):
+        print("Changing Direction")
         self.line_counter = 0
         self.line_repeated += 1
         if(self.line_repeated == 2):
@@ -41,6 +41,7 @@ class grid:
         if(self.direction == 4):
             self.direction = 0
         self.validate_grid()
+        print("Direction = {}".format(self.direction))
 
     def validate_grid(self):
         if(self.direction == 1):
@@ -60,17 +61,15 @@ class grid:
 
     def move_right(self,value):
         self.current_location[1] += 1
+        print("Current location = {}".format(self.current_location))
         if(len(self.nodes[self.current_location[0]]) == self.current_location[1]):
             self.nodes[self.current_location[0]].append(None)
-        self.nodes[self.current_location[0]][self.current_location[1]] = self.get_next_value()
+        self.nodes[self.current_location[0]][self.current_location[1]] = value
 
     def insert_left_column(self):
         for idx, row in enumerate(self.nodes):
             row.insert(0,None)
         self.origin[1] += 1
-
-    def get_last_value(self):
-        return self.nodes[self.last_location[0]][self.last_location[1]]
 
     def get_distance(self):
         return abs(self.last_location[0] - self.origin[0]) + abs(self.last_location[1] - self.origin[1])
@@ -80,33 +79,22 @@ class grid:
         if(self.current_location[1] == -1):
             self.insert_left_column()
             self.current_location[1]+=1
-        self.nodes[self.current_location[0]][self.current_location[1]] = self.get_next_value()
+        print("Current location = {}".format(self.current_location))
+        self.nodes[self.current_location[0]][self.current_location[1]] = value
 
     def move_up(self,value):
         self.current_location[0] += 1
+        print("Current location = {}".format(self.current_location))
         try:
-            self.nodes[self.current_location[0]][self.current_location[1]] = self.get_next_value()
+            self.nodes[self.current_location[0]][self.current_location[1]] = value
         except:
-            self.nodes[self.current_location[0]].append(self.get_next_value())
+            self.nodes[self.current_location[0]].append(value)
 
 
     def move_down(self,value):
         self.current_location[0] -= 1
-        self.nodes[self.current_location[0]][self.current_location[1]] = self.get_next_value()
-
-    def get_next_value(self):
-        val = 0
-        adjacents = [[1,0],[1,-1],[1,1],[0,-1],[0,1],[-1,-1],[-1,0],[-1,1]]
-        for idx, adj in enumerate(adjacents):
-            try:
-                y_ax = self.current_location[0] + adj[0]
-                x_ax = self.current_location[1] + adj[1]
-                if(y_ax > -1 and x_ax > -1):
-                    val += self.nodes[y_ax][x_ax]
-            except:
-                None
-
-        return val
+        print("Current location = {}".format(self.current_location))
+        self.nodes[self.current_location[0]][self.current_location[1]] = value
 
 
 
