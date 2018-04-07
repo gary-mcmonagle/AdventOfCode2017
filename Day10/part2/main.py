@@ -1,5 +1,5 @@
 from circular_list import circular_list
-input_string = "94,84,0,79,2,27,81,1,123,93,218,23,103,255,254,243"
+input_string = "flqrgnkx-0"
 #input_string = "1,2,3"
 lengths = []
 for idx, num in enumerate(input_string):
@@ -17,6 +17,6 @@ my_string = ""
 for idx, den in enumerate(dense_hash):
     var = str(hex(int(den)).rstrip("L").lstrip("0x") or "0")
     if len(var) == 1:
-        var = "0"+varl
+        var = "0"+var
     my_string += var
 print(my_string)
